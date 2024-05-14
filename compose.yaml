@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build : /frontend/Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - APP_PORT=8000
+  
+  
