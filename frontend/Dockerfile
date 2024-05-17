@@ -2,16 +2,16 @@ FROM node:21-alpine
 
 RUN npm i -g pnpm
 
-COPY ./package.json /frontend
-
 WORKDIR /frontend
+
+COPY ./package.json .
 
 RUN pnpm i
 
-COPY . /frontend
+COPY . .
 
 RUN pnpm build
 
-EXPOSE 8000
+EXPOSE 3344
 
-CMD ["pnpm" , "start"]
+CMD ["pnpm" , "preview"]
