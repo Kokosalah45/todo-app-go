@@ -8,7 +8,7 @@ type Config struct {
 	Db *DBConfig
 }
 
-func NewConfig(port , env , DB *DBConfig) *Config {
+func NewConfig(port , env string , DB *DBConfig) *Config {
 	addr := fmt.Sprintf(":%s", port)
 	return &Config{
 		Port: addr,
