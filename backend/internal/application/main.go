@@ -34,7 +34,7 @@ func NewApp(config *config.Config, infoLog *log.Logger, errorLog *log.Logger) *a
 	}
 }
 
-func (app *application) RegisterHandler(router *http.ServeMux)  {
+func (app *application) RegisterRouter(router *http.ServeMux)  {
 	app.router = router
 }
 
