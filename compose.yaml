@@ -1,9 +1,35 @@
 services:
+  DB:
+    container_name: mydb
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+     DB_ROOT_PASSWORD: root
+     DB_DATABASE: todo
+     DB_USER: user
+     DB_PASSWORD: password
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  backend:
+    container_name: mybackend
+    build : ./dockerfiles/Dockerfile.backend
+    depends_on:
+      - DB
+    ports:
+      - 3345:8001
+    environment:
+      - APP_PORT=8001
+      - DB_HOST=mydb
   frontend:
+    depends_on:
+      - backend
+    container_name: myfrontend
     build : ./dockerfiles/Dockerfile.frontend
     ports:
       - 3344:8000
     environment:
       - APP_PORT=8000
-  
+      - BACKEND_HOST=mybackend
+
   

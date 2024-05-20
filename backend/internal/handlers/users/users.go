@@ -25,8 +25,7 @@ func ListUsers(w http.ResponseWriter , r *http.Request){
 	users := FakeUsers
 
 	encoder := json.NewEncoder(w)
-
-
+	
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	err := encoder.Encode(&users)
