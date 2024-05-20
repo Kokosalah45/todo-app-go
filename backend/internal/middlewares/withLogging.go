@@ -10,6 +10,12 @@ func WithLogging(f http.Handler) http.HandlerFunc {
 	// and this is because i want to di extra stuff so its a way lets say to trick the system
 	return  func(w http.ResponseWriter , r *http.Request){
 		f.ServeHTTP(w , r)
+		
 	}
 }
+
+
+
+
+
 

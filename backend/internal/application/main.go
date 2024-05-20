@@ -2,7 +2,6 @@ package application
 
 import (
 	"log"
-	"net"
 	"net/http"
 	"todo-rest-api/config"
 )
@@ -17,13 +16,6 @@ type application struct {
 	version string
 }
 
-func handleConnection (conn  net.Conn){
-	defer conn.Close()
-	_, err := conn.Write([]byte("Hello from server"))
-	if err != nil {
-		log.Println(err)
-	}
-}
 
 func NewApp(config *config.Config, infoLog *log.Logger, errorLog *log.Logger) *application {
 	return &application{
@@ -44,7 +36,6 @@ func (app *application) Serve() {
 		Addr:  app.config.Port,
 		Handler: app.router,
 		ErrorLog: app.errorLog,
-		 
 	}
 
 	app.infoLog.Printf("Starting server on %s", srv.Addr)
@@ -52,3 +43,5 @@ func (app *application) Serve() {
 	app.errorLog.Fatal(err)
 
 }
+
+

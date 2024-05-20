@@ -6,7 +6,9 @@ import (
 )
 
 func RegisterRoutes(router *http.ServeMux) {
-	router.HandleFunc("GET /users/{id}/",http.HandlerFunc(users.GetUserByID))
-	router.HandleFunc("GET /users/", http.HandlerFunc(users.ListUsers))
+	router.HandleFunc("GET /users/{id}/", users.GetUserByID)
+	router.HandleFunc("GET /users/", users.ListUsers)
 }
+
+
 
