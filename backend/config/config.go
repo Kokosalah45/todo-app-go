@@ -8,6 +8,10 @@ type Config struct {
 	Db *DBConfig
 }
 
+type DBConfig struct {
+	Dsn string
+}
+
 func NewConfig(port , env string , DB *DBConfig) *Config {
 	addr := fmt.Sprintf(":%s", port)
 	return &Config{
@@ -15,10 +19,6 @@ func NewConfig(port , env string , DB *DBConfig) *Config {
 		Env: "development",
 		Db: DB,
 	}
-}
-
-type DBConfig struct {
-	Dsn string
 }
 
 func NewDBConfig(dsn string) *DBConfig {
