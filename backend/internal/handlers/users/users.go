@@ -3,15 +3,11 @@ package users
 import (
 	"encoding/json"
 	"net/http"
+	"todo-rest-api/internal/models"
 )
 
-type User struct {
-	ID string `json:"id"`
-	FirstName string `json:"firstName"`
-	LastName string `json:"lastName"`
-}
 
-var FakeUsers = []User{
+var FakeUsers = []models.User{
 	{ID: "1", FirstName: "John", LastName: "Doe"},
 	{ID: "2", FirstName: "Jane", LastName: "Doe"},
 	{ID: "3", FirstName: "John", LastName: "Smith"},

@@ -5,32 +5,53 @@ services:
     ports:
       - 5432:5432
     environment:
-     DB_ROOT_PASSWORD: root
-     DB_DATABASE: todo
-     DB_USER: user
-     DB_PASSWORD: password
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    networks:
+      - fullstack
     volumes:
       - ./data:/var/lib/postgresql/data
   backend:
     container_name: mybackend
-    build : ./backend
+    build : 
+      context: ./backend
+      dockerfile: Dockerfile
     depends_on:
       - DB
-    ports:
-      - 3345:8080
+    # ports:
+    #   - 3343:8080
     environment:
       - API_PORT=8080
-      - DB_HOST=mydb
+      - POSTGRES_HOST=mydb
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    networks:
+      - fullstack
   frontend:
     depends_on:
       - backend
     container_name: myfrontend
-    build : ./frontend
+    build :
+      context: ./frontend
+      dockerfile: Dockerfile
+    # ports:
+    #   - 3345:8000
+    networks:
+      - fullstack
+  nginx:
+    container_name: mynginx
+    depends_on:
+      - backend
+      - frontend
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     ports:
-      - 3344:8000
-    environment:
-      - APP_PORT=8000
-      - BACKEND_HOST=mybackend
-      - BACKEND_PORT=8080
-
-  
+      - 80:80
+    networks:
+      - fullstack
+networks:
+  fullstack:
+    driver: bridge
