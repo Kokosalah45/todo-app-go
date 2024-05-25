@@ -11,7 +11,7 @@ services:
     networks:
       - fullstack
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./db-volume:/var/lib/postgresql/data
   backend:
     container_name: mybackend
     build : 
@@ -19,8 +19,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - DB
-    # ports:
-    #   - 3343:8080
     environment:
       - API_PORT=8080
       - POSTGRES_HOST=mydb
@@ -36,8 +34,6 @@ services:
     build :
       context: ./frontend
       dockerfile: Dockerfile
-    # ports:
-    #   - 3345:8000
     networks:
       - fullstack
   nginx:
